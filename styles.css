@@ -1,0 +1,104 @@
+body {
+  font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  line-height: 1.4em;
+  color: #999;
+}
+
+.node {
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+  position: absolute !important;
+  padding: 4px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  min-width: 80px;
+  background: #1f2324;
+  width: 80px;
+  color: #aaa;
+  font-size: 10px;
+}
+
+.head {
+  font-weight: normal;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.options {
+  overflow: hidden;
+  *zoom: 1;
+  width: 100%;
+}
+
+.inputs {
+  display: inline;
+  float: left;
+  color: #777;
+  width: 50%;
+}
+
+.field {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  line-height: 10px;
+}
+
+.inner-field {
+  cursor: pointer;
+  display: inline-block;
+  min-width: 100%;
+  min-height: 16px;
+  background: transparent;
+}
+
+.inner-field span {
+  margin-right: 4px;
+}
+
+.node .inner-field span {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: #555;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.center {
+  float: left;
+}
+
+.outputs {
+  float: right;
+  width: 50%;
+}
+
+.node .outputs > div {
+  display: inline-block;
+  width: 100%;
+  vertical-align: middle;
+  line-height: 10px;
+  height: 12px;
+  text-align: right;
+}
+
+.node .inner-field {
+  cursor: pointer;
+  display: inline-block;
+  min-width: 100%;
+  min-height: 16px;
+  background: transparent;
+}
+
+.node .inner-field span {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  background: #555;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+}
+
+/* ------------ */

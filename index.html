@@ -1,154 +1,63 @@
 <html>
-    <head>
-        <title>UI</title>
-    </head>
-    <style>
-        body {
-            font-family: "Source Sans Pro","Helvetica Neue",Arial,Helvetica,sans-serif;
-            font-size: 12px;
-            line-height: 1.4em;
-            color: #999;
-        }
+  <head>
+    <title>UI</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="node">
+      <div class="head">
+        <span>boolean</span>
+      </div>
 
-        .node {
-            box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.2);
-            position: absolute !important;
-            padding: 4px;
-            border: 1px solid transparent;
-            border-radius: 4px;
-            min-width: 80px;
-            background: #1f2324;
-            width: 80px;
-            color: #aaa;
-            font-size: 10px;
-        }
-
-        .head {
-            font-weight: normal;
-            letter-spacing: 1px;
-            text-align: center;
-        }
-        .options {
-            overflow: hidden;
-            *zoom: 1;
-            width: 100%;
-        }
-
-        .inputs {
-            display: inline;
-            float: left;
-            color: #777;
-            width: 50%;
-        }
-
-        .field {
-            display: inline-block;
-            width: 100%;
-            vertical-align: middle;
-            line-height: 10px;
-        }
-
-        .inner-field {
-            cursor: pointer;
-            display: inline-block;
-            min-width: 100%;
-            min-height: 16px;
-            background: transparent;
-        }
-
-        .inner-field span {
-            margin-right: 4px;
-        }
-
-        .node .inner-field span {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            background: #555;
-            -moz-border-radius: 4px;
-            -webkit-border-radius: 4px;
-            border-radius: 4px;
-        }
-
-
-        .center {
-            float: left;
-        }
-
-        .outputs {
-            float: right;
-            width: 50%;
-        }
-
-        .node .outputs > div {
-            display: inline-block;
-            width: 100%;
-            vertical-align: middle;
-            line-height: 10px;
-            height: 12px;
-            text-align: right;
-        }
-
-        .node .inner-field {
-            cursor: pointer;
-            display: inline-block;
-            min-width: 100%;
-            min-height: 16px;
-            background: transparent;
-        }
-
-        .node .inner-field span {
-            display: inline-block;
-            width: 4px;
-            height: 4px;
-            background: #555;
-            -moz-border-radius: 4px;
-            -webkit-border-radius: 4px;
-            border-radius: 4px;
-        }
-
-    </style>
-    <body>
-
-        <div class="node">
-            <div class="head">
-                <span>boolean</span>
-            </div>
-
-            <div class="options">
-                <div class="inputs">
-                    <div class="field">
-                        <span class="inner-field">
-                            <span></span>
-                            bool
-                        </span>
-                    </div>
-                </div>
-
-                <div class="center"></div>
-
-                <div class="outputs">
-                    <div class="field field-out">
-                        <span class="inner-field">
-                            out
-                            <span></span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+      <div class="options">
+        <div class="inputs">
+          <div class="field">
+            <span class="inner-field">
+              <span></span>
+              bool
+            </span>
+          </div>
         </div>
 
-        <div class="activity"></div>
+        <div class="center"></div>
 
-        <div class="gateway"></div>
+        <div class="outputs">
+          <div class="field field-out">
+            <span class="inner-field">
+              out
+              <span></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <div class="event"></div>
+    <div class="activity"></div>
 
-        <div class="data_model"></div>
+    <div class="gateway"></div>
 
-        <div class="splines"></div>
+    <div class="event"></div>
 
-        <div class="code-pane"></div>
+    <div class="data_model"></div>
 
-    </body>
+    <div class="splines"></div>
+
+    <div class="code-pane"></div>
+
+    <!-- ----------------- -->
+
+    <div class="navbar">
+      <ul class="menu--bar">
+        <li class="menu--bar--item">File</li>
+        <li class="menu--bar--item">Edit</li>
+        <li class="menu--bar--item">View</li>
+        <li class="menu--bar--item">Examples</li>
+        <li class="menu--bar--item">About</li>
+      </ul>
+    </div>
+
+    <div class="user--section"></div>
+    <div class="process--section"></div>
+    <div class="data--section"></div>
+  </body>
 </html>
