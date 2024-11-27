@@ -1,29 +1,24 @@
-<html>
-  <head>
-    <title>UI</title>
-    <link rel="stylesheet" href="styles.css" />
-    <style>
-      body {
-        font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica,
-          sans-serif;
-        font-size: 12px;
-        line-height: 1.4em;
-        color: #999;
-        background: #313638;
-      }
-
-      element {
-        /* position: absolute; */
-        margin: 0px;
-        inset: 0px 0px auto;
-        width: auto;
-        z-index: 0;
-        height: 26px;
-        display: block;
-        visibility: visible;
-      }
-
-      .node {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modeling Screen</title>
+  <style>
+    /* General Reset and Body Styling */
+    body {
+      margin: 0;
+      font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      line-height: 1.4em;
+      color: #ccc;
+      background: #313638;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+    
+.node {
         box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
         position: absolute !important;
         padding: 4px;
@@ -120,66 +115,156 @@
         border-radius: 4px;
       }
 
-      /* ------------ */
-      .menu--bar {
-        background: #313638;
-        height: 26px;
-        border-bottom: 1px solid #232628;
-        z-index: 999 !important;
-        overflow: visible !important;
 
-        display: flex;
-        list-style-type: none;
-        padding: 0 0 0 40px;
-      }
+    /* Menu Bar Styling */
+    .menu-bar {
+      background: #313638;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      padding: 0 15px;
+      border-bottom: 1px solid #444;
+    }
 
-      .menubar--item {
-        float: left;
-      }
+    .menu-bar li {
+      list-style: none;
+      margin-right: 15px;
+    }
 
-      .ui-button {
-        border-right: 1px dashed transparent;
-        border-left: 1px dashed transparent;
-      }
+    .menu-bar a {
+      text-decoration: none;
+      color: #ccc;
+      font-size: 12px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
 
-      .ui-menubar-link {
-        float: left;
-        font-weight: normal;
-        border-top-width: 0 !important;
-        border-bottom-width: 0 !important;
-        margin: 0;
-        outline: none;
-      }
+    .menu-bar a:hover {
+      color: #fff;
+    }
 
-      .ui-button-text {
-        color: rgb(204, 204, 204);
-        cursor: pointer;
-        display: block;
-        font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica,
-          sans-serif;
-        font-size: 12px;
-        font-weight: 400;
-        line-height: 16.8px;
-        list-style-image: none;
-        list-style-position: outside;
-        list-style-type: none;
-        padding-bottom: 4.8px;
-        padding-left: 12px;
-        padding-right: 25.2px;
-        padding-top: 4.8px;
-        text-align: center;
-        visibility: visible;
-      }
+    /* Modal Styling */
+    .modal {
+      position: absolute;
+      background: #232628;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 10;
+    }
 
-      /* ------------- */
+    .modal ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-      .side-bar {
-        background: #313638;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- <div class="node">
+    .modal ul li {
+      margin: 8px 0;
+      font-size: 12px;
+      cursor: pointer;
+      color: #ccc;
+    }
+
+    .modal ul li:hover {
+      color: #fff;
+    }
+
+    /* Layout Styling */
+    .content {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      background: #313638;
+    }
+
+    /* Resizable Side Bar */
+    .side-bar {
+      width: 200px;
+      min-width: 200px;
+      background: #313638;
+      padding: 20px;
+      overflow-y: auto;
+      color: #ccc;
+    }
+
+    .side-bar h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .resizer {
+      width: 5px;
+      cursor: ew-resize;
+      background: #444;
+    }
+
+    /* Modeling Section Styling */
+    .model-section {
+      flex: 1;
+      background: #313638;
+      padding: 20px;
+      overflow-y: auto;
+      color: #ccc;
+    }
+
+    .model-section h3 {
+      font-size: 16px;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu Bar -->
+  <ul class="menu-bar">
+    <li><a href="#" class="menu-item" data-modal="fileModal">File</a></li>
+    <li><a href="#" class="menu-item" data-modal="viewModal">View</a></li>
+    <li><a href="#">Edit</a></li>
+    <li><a href="#">Examples</a></li>
+    <li><a href="#">About</a></li>
+  </ul>
+
+  <!-- Modals -->
+  <div class="modal" id="fileModal">
+    <ul>
+      <li>New</li>
+      <li>Open</li>
+      <li>Save</li>
+      <li>Export to Code</li>
+      <li>Export Image</li>
+    </ul>
+  </div>
+
+  <div class="modal" id="viewModal">
+    <ul>
+      <li>Toggle Grid</li>
+      <li>Zoom In</li>
+      <li>Zoom Out</li>
+      <li>Full Screen</li>
+    </ul>
+  </div>
+
+  <!-- Main Content -->
+  <div class="content">
+    <!-- Side Bar -->
+    <div class="side-bar">
+      <h3>User Information</h3>
+      <p><strong>Profile:</strong> John Doe</p>
+      <p><strong>Value Proposition:</strong> Streamline business processes.</p>
+      <p><strong>User Story:</strong> "As a user, I want an intuitive interface to manage models."</p>
+    </div>
+
+    <!-- Resizer -->
+    <div class="resizer"></div>
+
+    <!-- Modeling Section -->
+    <div class="model-section">
+      <h3>Modeling Surface</h3>
+      <p>Data models and process models will be displayed here.</p>
+      <div class="node">
       <div class="head">
         <span>boolean</span>
       </div>
@@ -205,57 +290,51 @@
           </div>
         </div>
       </div>
-    </div> -->
-
-    <div class="activity"></div>
-
-    <div class="gateway"></div>
-
-    <div class="event"></div>
-
-    <div class="data_model"></div>
-
-    <div class="splines"></div>
-
-    <div class="code-pane"></div>
-
-    <!-- ----------------- -->
-
-    <div class="navbar">
-      <ul class="menu--bar">
-        <li class="menubar--item">
-          <a class="ui-button ui-menubar-link">
-            <span class="ui-button-text">File</span>
-          </a>
-        </li>
-        <li class="menubar--item">
-          <a class="ui-button ui-menubar-link">
-            <span class="ui-button-text">Edit</span>
-          </a>
-        </li>
-
-        <li class="menubar--item">
-          <a class="ui-button ui-menubar-link">
-            <span class="ui-button-text">View</span>
-          </a>
-        </li>
-
-        <li class="menubar--item">
-          <a class="ui-button ui-menubar-link">
-            <span class="ui-button-text">Examples</span>
-          </a>
-        </li>
-
-        <li class="menubar--item">
-          <a class="ui-button ui-menubar-link">
-            <span class="ui-button-text">About</span>
-          </a>
-        </li>
-      </ul>
+    </div> 
     </div>
+  </div>
 
-    <div class="side-bar"></div>
-    <div class="process--section"></div>
-    <div class="data--section"></div>
-  </body>
+  <script>
+    // Modal Toggle
+    document.querySelectorAll('.menu-item').forEach(item => {
+      item.addEventListener('click', event => {
+        event.preventDefault();
+        
+        // Close other modals
+        document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none');
+
+        // Get modal and position it
+        const modalId = item.getAttribute('data-modal');
+        const modal = document.getElementById(modalId);
+        const rect = item.getBoundingClientRect();
+        
+        modal.style.top = `${rect.bottom}px`;
+        modal.style.left = `${rect.left}px`;
+        modal.style.display = 'block';
+      });
+    });
+
+    // Resizable Sidebar
+    const resizer = document.querySelector('.resizer');
+    const sideBar = document.querySelector('.side-bar');
+    let isResizing = false;
+
+    resizer.addEventListener('mousedown', () => {
+      isResizing = true;
+      document.body.style.cursor = 'ew-resize';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+      if (isResizing) {
+        const newWidth = Math.max(200, e.clientX); // Ensure minimum width
+        sideBar.style.width = `${newWidth}px`;
+      }
+    });
+
+    document.addEventListener('mouseup', () => {
+      isResizing = false;
+      document.body.style.cursor = 'default';
+    });
+  </script>
+</body>
 </html>
