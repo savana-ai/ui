@@ -2,9 +2,184 @@
   <head>
     <title>UI</title>
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica,
+          sans-serif;
+        font-size: 12px;
+        line-height: 1.4em;
+        color: #999;
+        background: #313638;
+      }
+
+      element {
+        /* position: absolute; */
+        margin: 0px;
+        inset: 0px 0px auto;
+        width: auto;
+        z-index: 0;
+        height: 26px;
+        display: block;
+        visibility: visible;
+      }
+
+      .node {
+        box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+        position: absolute !important;
+        padding: 4px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        min-width: 80px;
+        background: #1f2324;
+        width: 80px;
+        color: #aaa;
+        font-size: 10px;
+
+        position: relative;
+      }
+
+      .head {
+        font-weight: normal;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+      .options {
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .inputs {
+        display: inline;
+        float: left;
+        color: #777;
+        width: 50%;
+      }
+
+      .field {
+        display: inline-block;
+        width: 100%;
+        vertical-align: middle;
+        line-height: 10px;
+      }
+
+      .inner-field {
+        cursor: pointer;
+        display: inline-block;
+        min-width: 100%;
+        min-height: 16px;
+        background: transparent;
+      }
+
+      .inner-field span {
+        margin-right: 4px;
+      }
+
+      .node .inner-field span {
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        background: #555;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+      }
+
+      .center {
+        float: left;
+      }
+
+      .outputs {
+        float: right;
+        width: 50%;
+      }
+
+      .node .outputs > div {
+        display: inline-block;
+        width: 100%;
+        vertical-align: middle;
+        line-height: 10px;
+        height: 12px;
+        text-align: right;
+      }
+
+      .node .inner-field {
+        cursor: pointer;
+        display: inline-block;
+        min-width: 100%;
+        min-height: 16px;
+        background: transparent;
+      }
+
+      .node .inner-field span {
+        display: inline-block;
+        width: 4px;
+        height: 4px;
+        background: #555;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+      }
+
+      /* ------------ */
+      .menu--bar {
+        background: #313638;
+        height: 26px;
+        border-bottom: 1px solid #232628;
+        z-index: 999 !important;
+        overflow: visible !important;
+
+        display: flex;
+        list-style-type: none;
+        padding: 0 0 0 40px;
+      }
+
+      .menubar--item {
+        float: left;
+      }
+
+      .ui-button {
+        border-right: 1px dashed transparent;
+        border-left: 1px dashed transparent;
+      }
+
+      .ui-menubar-link {
+        float: left;
+        font-weight: normal;
+        border-top-width: 0 !important;
+        border-bottom-width: 0 !important;
+        margin: 0;
+        outline: none;
+      }
+
+      .ui-button-text {
+        color: rgb(204, 204, 204);
+        cursor: pointer;
+        display: block;
+        font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica,
+          sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        line-height: 16.8px;
+        list-style-image: none;
+        list-style-position: outside;
+        list-style-type: none;
+        padding-bottom: 4.8px;
+        padding-left: 12px;
+        padding-right: 25.2px;
+        padding-top: 4.8px;
+        text-align: center;
+        visibility: visible;
+      }
+
+      /* ------------- */
+
+      .side-bar {
+        background: #313638;
+      }
+    </style>
   </head>
   <body>
-    <div class="node">
+    <!-- <div class="node">
       <div class="head">
         <span>boolean</span>
       </div>
@@ -30,7 +205,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="activity"></div>
 
@@ -48,15 +223,38 @@
 
     <div class="navbar">
       <ul class="menu--bar">
-        <li class="menu--bar--item">File</li>
-        <li class="menu--bar--item">Edit</li>
-        <li class="menu--bar--item">View</li>
-        <li class="menu--bar--item">Examples</li>
-        <li class="menu--bar--item">About</li>
+        <li class="menubar--item">
+          <a class="ui-button ui-menubar-link">
+            <span class="ui-button-text">File</span>
+          </a>
+        </li>
+        <li class="menubar--item">
+          <a class="ui-button ui-menubar-link">
+            <span class="ui-button-text">Edit</span>
+          </a>
+        </li>
+
+        <li class="menubar--item">
+          <a class="ui-button ui-menubar-link">
+            <span class="ui-button-text">View</span>
+          </a>
+        </li>
+
+        <li class="menubar--item">
+          <a class="ui-button ui-menubar-link">
+            <span class="ui-button-text">Examples</span>
+          </a>
+        </li>
+
+        <li class="menubar--item">
+          <a class="ui-button ui-menubar-link">
+            <span class="ui-button-text">About</span>
+          </a>
+        </li>
       </ul>
     </div>
 
-    <div class="user--section"></div>
+    <div class="side-bar"></div>
     <div class="process--section"></div>
     <div class="data--section"></div>
   </body>

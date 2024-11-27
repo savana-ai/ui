@@ -5,6 +5,17 @@ body {
   color: #999;
 }
 
+element {
+  position: absolute;
+  margin: 0px;
+  inset: 0px 0px auto;
+  width: auto;
+  z-index: 0;
+  height: 26px;
+  display: block;
+  visibility: visible;
+}
+
 .node {
   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
   position: absolute !important;
@@ -25,7 +36,6 @@ body {
 }
 .options {
   overflow: hidden;
-  *zoom: 1;
   width: 100%;
 }
 
@@ -102,3 +112,18 @@ body {
 }
 
 /* ------------ */
+.menu--bar {
+  background: #313638;
+  height: 26px;
+  border-bottom: 1px solid #232628;
+  z-index: 999 !important;
+  overflow: visible !important;
+
+  display: flex;
+  list-style-type: none;
+  padding: 0 0 0 40px;
+}
+
+.menubar--item {
+  float: left;
+}
