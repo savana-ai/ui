@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Model Visualization with Raphael.js</title>
+    <style>
+      .canvas {
+        position: relative;
+        width: 100%;
+        height: 600px;
+        background-color: #f4f4f4;
+        overflow: hidden;
+      }
+
+      .node {
+        position: absolute;
+        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background: #1f2324;
+        color: #aaa;
+        font-size: 12px;
+        width: 120px;
+        text-align: center;
+        cursor: move;
+      }
+
+      .head {
+        font-weight: bold;
+        color: #fff;
+        margin-bottom: 5px;
+      }
+
+      .attributes {
+        text-align: left;
+        font-size: 10px;
+      }
+
+      .attribute {
+        display: flex;
+        justify-content: space-between;
+        margin: 2px 0;
+        color: #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas" id="canvas"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.3.0/raphael.min.js"></script>
+    <script>
+      const dataModel = {
+        nodes: [
+          {
+            id: 1,
+            name: "Order",
+            attributes: [
+              { name: "id", type: "int" },
+              { name: "total", type: "float" },
+            ],
+            x: 100,
+            y: 100,
+          },
+          {
+            id: 2,
+            name: "Customer",
+            attributes: [
+              { name: "id", type: "int" },
+              { name: "name", type: "str" },
+            ],
+            x: 300,
+            y: 100,
+          },
+          {
+            id: 3,
+            name: "Product",
+            attributes: [
+              { name: "id", type: "int" },
+              { name: "price", type: "float" },
+            ],
+            x: 200,
+            y: 300,
+          },
+          {
+            id: 4,
+            name: "Invoice",
+            attributes: [
+              { name: "id", type: "int" },
+              { name: "amount", type: "float" },
+            ],
+            x: 400,
+            y: 300,
+          },
+        ],
+        links: [
+          { source: 1, target: 2 },
+          { source: 1, target: 3 },
+          { source: 4, target: 1 },
+        ],
+      };
+
+      const canvas = document.getElementById("canvas");
+      const paper = Raphael(canvas, canvas.clientWidth, canvas.clientHeight);
+      const nodesMap = {};
+
+      // Create draggable nodes
+      dataModel.nodes.forEach((node) => {
+        const nodeElement = document.createElement("div");
+        nodeElement.className = "node";
+        nodeElement.style.left = `${node.x}px`;
+        nodeElement.style.top = `${node.y}px`;
+
+        const head = document.createElement("div");
+        head.className = "head";
+        head.innerText = node.name;
+
+        const attributes = document.createElement("div");
+        attributes.className = "attributes";
+
+        node.attributes.forEach((attr) => {
+          const attribute = document.createElement("div");
+          attribute.className = "attribute";
+          attribute.innerHTML = `<span>${attr.name}</span><span>${attr.type}</span>`;
+          attributes.appendChild(attribute);
+        });
+
+        nodeElement.appendChild(head);
+        nodeElement.appendChild(attributes);
+        canvas.appendChild(nodeElement);
+
+        // Save node reference for later
+        nodesMap[node.id] = nodeElement;
+
+        // Make nodes draggable
+        makeDraggable(nodeElement, node.id);
+      });
+
+      // Draw connections
+      function drawConnections() {
+        paper.clear();
+        dataModel.links.forEach((link) => {
+          const sourceNode = dataModel.nodes.find(
+            (node) => node.id === link.source
+          );
+          const targetNode = dataModel.nodes.find(
+            (node) => node.id === link.target
+          );
+
+          if (sourceNode && targetNode) {
+            const sourceEl = nodesMap[sourceNode.id];
+            const targetEl = nodesMap[targetNode.id];
+
+            const sourceX =
+              parseInt(sourceEl.style.left, 10) + sourceEl.offsetWidth / 2;
+            const sourceY =
+              parseInt(sourceEl.style.top, 10) + sourceEl.offsetHeight / 2;
+            const targetX =
+              parseInt(targetEl.style.left, 10) + targetEl.offsetWidth / 2;
+            const targetY =
+              parseInt(targetEl.style.top, 10) + targetEl.offsetHeight / 2;
+
+            const pathString = `M${sourceX},${sourceY} C${
+              (sourceX + targetX) / 2
+            },${sourceY} ${
+              (sourceX + targetX) / 2
+            },${targetY} ${targetX},${targetY}`;
+            paper.path(pathString).attr({
+              stroke: "#888",
+              "stroke-width": 2,
+            });
+          }
+        });
+      }
+
+      drawConnections();
+
+      // Draggable logic
+      function makeDraggable(element, id) {
+        let offsetX = 0,
+          offsetY = 0,
+          isDragging = false;
+
+        element.addEventListener("mousedown", (e) => {
+          isDragging = true;
+          offsetX = e.clientX - element.offsetLeft;
+          offsetY = e.clientY - element.offsetTop;
+          element.style.zIndex = 1000; // Bring to front
+        });
+
+        document.addEventListener("mousemove", (e) => {
+          if (isDragging) {
+            const x = e.clientX - offsetX;
+            const y = e.clientY - offsetY;
+
+            element.style.left = `${x}px`;
+            element.style.top = `${y}px`;
+
+            // Update the node's coordinates
+            const node = dataModel.nodes.find((n) => n.id === id);
+            node.x = x;
+            node.y = y;
+
+            drawConnections();
+          }
+        });
+
+        document.addEventListener("mouseup", () => {
+          isDragging = false;
+          element.style.zIndex = 1;
+        });
+      }
+    </script>
+  </body>
+</html>

@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Modeling Screen</title>
-  <style>
-    /* General Reset and Body Styling */
-    body {
-      margin: 0;
-      font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      line-height: 1.4em;
-      color: #ccc;
-      background: #313638;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-    }
-    
-.node {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modeling Screen</title>
+    <style>
+      /* General Reset and Body Styling */
+      body {
+        margin: 0;
+        font-family: "Source Sans Pro", "Helvetica Neue", Arial, Helvetica,
+          sans-serif;
+        font-size: 12px;
+        line-height: 1.4em;
+        color: #ccc;
+        background: #313638;
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .node {
         box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
         position: absolute !important;
         padding: 4px;
@@ -115,226 +116,231 @@
         border-radius: 4px;
       }
 
-
-    /* Menu Bar Styling */
-    .menu-bar {
-      background: #313638;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      padding: 0 15px;
-      border-bottom: 1px solid #444;
-    }
-
-    .menu-bar li {
-      list-style: none;
-      margin-right: 15px;
-    }
-
-    .menu-bar a {
-      text-decoration: none;
-      color: #ccc;
-      font-size: 12px;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .menu-bar a:hover {
-      color: #fff;
-    }
-
-    /* Modal Styling */
-    .modal {
-      position: absolute;
-      background: #232628;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-      display: none;
-      z-index: 10;
-    }
-
-    .modal ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .modal ul li {
-      margin: 8px 0;
-      font-size: 12px;
-      cursor: pointer;
-      color: #ccc;
-    }
-
-    .modal ul li:hover {
-      color: #fff;
-    }
-
-    /* Layout Styling */
-    .content {
-      display: flex;
-      flex: 1;
-      overflow: hidden;
-      background: #313638;
-    }
-
-    /* Resizable Side Bar */
-    .side-bar {
-      width: 200px;
-      min-width: 200px;
-      background: #313638;
-      padding: 20px;
-      overflow-y: auto;
-      color: #ccc;
-    }
-
-    .side-bar h3 {
-      font-size: 16px;
-      margin-bottom: 10px;
-      color: #fff;
-    }
-
-    .resizer {
-      width: 5px;
-      cursor: ew-resize;
-      background: #444;
-    }
-
-    /* Modeling Section Styling */
-    .model-section {
-      flex: 1;
-      background: #313638;
-      padding: 20px;
-      overflow-y: auto;
-      color: #ccc;
-    }
-
-    .model-section h3 {
-      font-size: 16px;
-      color: #fff;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Menu Bar -->
-  <ul class="menu-bar">
-    <li><a href="#" class="menu-item" data-modal="fileModal">File</a></li>
-    <li><a href="#" class="menu-item" data-modal="viewModal">View</a></li>
-    <li><a href="#">Edit</a></li>
-    <li><a href="#">Examples</a></li>
-    <li><a href="#">About</a></li>
-  </ul>
-
-  <!-- Modals -->
-  <div class="modal" id="fileModal">
-    <ul>
-      <li>New</li>
-      <li>Open</li>
-      <li>Save</li>
-      <li>Export to Code</li>
-      <li>Export Image</li>
-    </ul>
-  </div>
-
-  <div class="modal" id="viewModal">
-    <ul>
-      <li>Toggle Grid</li>
-      <li>Zoom In</li>
-      <li>Zoom Out</li>
-      <li>Full Screen</li>
-    </ul>
-  </div>
-
-  <!-- Main Content -->
-  <div class="content">
-    <!-- Side Bar -->
-    <div class="side-bar">
-      <h3>User Information</h3>
-      <p><strong>Profile:</strong> John Doe</p>
-      <p><strong>Value Proposition:</strong> Streamline business processes.</p>
-      <p><strong>User Story:</strong> "As a user, I want an intuitive interface to manage models."</p>
-    </div>
-
-    <!-- Resizer -->
-    <div class="resizer"></div>
-
-    <!-- Modeling Section -->
-    <div class="model-section">
-      <h3>Modeling Surface</h3>
-      <p>Data models and process models will be displayed here.</p>
-      <div class="node">
-      <div class="head">
-        <span>boolean</span>
-      </div>
-
-      <div class="options">
-        <div class="inputs">
-          <div class="field">
-            <span class="inner-field">
-              <span></span>
-              bool
-            </span>
-          </div>
-        </div>
-
-        <div class="center"></div>
-
-        <div class="outputs">
-          <div class="field field-out">
-            <span class="inner-field">
-              out
-              <span></span>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div> 
-    </div>
-  </div>
-
-  <script>
-    // Modal Toggle
-    document.querySelectorAll('.menu-item').forEach(item => {
-      item.addEventListener('click', event => {
-        event.preventDefault();
-        
-        // Close other modals
-        document.querySelectorAll('.modal').forEach(modal => modal.style.display = 'none');
-
-        // Get modal and position it
-        const modalId = item.getAttribute('data-modal');
-        const modal = document.getElementById(modalId);
-        const rect = item.getBoundingClientRect();
-        
-        modal.style.top = `${rect.bottom}px`;
-        modal.style.left = `${rect.left}px`;
-        modal.style.display = 'block';
-      });
-    });
-
-    // Resizable Sidebar
-    const resizer = document.querySelector('.resizer');
-    const sideBar = document.querySelector('.side-bar');
-    let isResizing = false;
-
-    resizer.addEventListener('mousedown', () => {
-      isResizing = true;
-      document.body.style.cursor = 'ew-resize';
-    });
-
-    document.addEventListener('mousemove', (e) => {
-      if (isResizing) {
-        const newWidth = Math.max(200, e.clientX); // Ensure minimum width
-        sideBar.style.width = `${newWidth}px`;
+      /* Menu Bar Styling */
+      .menu-bar {
+        background: #313638;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+        border-bottom: 1px solid #444;
       }
-    });
 
-    document.addEventListener('mouseup', () => {
-      isResizing = false;
-      document.body.style.cursor = 'default';
-    });
-  </script>
-</body>
+      .menu-bar li {
+        list-style: none;
+        margin-right: 15px;
+      }
+
+      .menu-bar a {
+        text-decoration: none;
+        color: #ccc;
+        font-size: 12px;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .menu-bar a:hover {
+        color: #fff;
+      }
+
+      /* Modal Styling */
+      .modal {
+        position: absolute;
+        background: #232628;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        display: none;
+        z-index: 10;
+      }
+
+      .modal ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .modal ul li {
+        margin: 8px 0;
+        font-size: 12px;
+        cursor: pointer;
+        color: #ccc;
+      }
+
+      .modal ul li:hover {
+        color: #fff;
+      }
+
+      /* Layout Styling */
+      .content {
+        display: flex;
+        flex: 1;
+        overflow: hidden;
+        background: #313638;
+      }
+
+      /* Resizable Side Bar */
+      .side-bar {
+        width: 200px;
+        min-width: 200px;
+        background: #313638;
+        padding: 20px;
+        overflow-y: auto;
+        color: #ccc;
+      }
+
+      .side-bar h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+        color: #fff;
+      }
+
+      .resizer {
+        width: 5px;
+        cursor: ew-resize;
+        background: #444;
+      }
+
+      /* Modeling Section Styling */
+      .model-section {
+        flex: 1;
+        background: #313638;
+        padding: 20px;
+        overflow-y: auto;
+        color: #ccc;
+      }
+
+      .model-section h3 {
+        font-size: 16px;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Menu Bar -->
+    <ul class="menu-bar">
+      <li><a href="#" class="menu-item" data-modal="fileModal">File</a></li>
+      <li><a href="#" class="menu-item" data-modal="viewModal">View</a></li>
+      <li><a href="#">Edit</a></li>
+      <li><a href="#">Examples</a></li>
+      <li><a href="#">About</a></li>
+    </ul>
+
+    <!-- Modals -->
+    <div class="modal" id="fileModal">
+      <ul>
+        <li>New</li>
+        <li>Open</li>
+        <li>Save</li>
+        <li>Export to Code</li>
+        <li>Export Image</li>
+      </ul>
+    </div>
+
+    <div class="modal" id="viewModal">
+      <ul>
+        <li>Toggle Grid</li>
+        <li>Zoom In</li>
+        <li>Zoom Out</li>
+        <li>Full Screen</li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Side Bar -->
+      <div class="side-bar">
+        <h3>User Information</h3>
+        <p><strong>Profile:</strong> John Doe</p>
+        <p>
+          <strong>Value Proposition:</strong> Streamline business processes.
+        </p>
+        <p>
+          <strong>User Story:</strong> "As a user, I want an intuitive interface
+          to manage models."
+        </p>
+      </div>
+
+      <!-- Resizer -->
+      <div class="resizer"></div>
+
+      <!-- Modeling Section -->
+      <div class="model-section">
+        <h3>Modeling Surface</h3>
+        <p>Data models and process models will be displayed here.</p>
+        <div class="node">
+          <div class="head">
+            <span>Order</span>
+          </div>
+
+          <div class="options">
+            <div class="inputs">
+              <div class="field">
+                <span class="inner-field">
+                  <span></span>
+                  name
+                </span>
+              </div>
+            </div>
+
+            <div class="center"></div>
+
+            <div class="outputs">
+              <div class="field field-out">
+                <span class="inner-field">
+                  str
+                  <span></span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Modal Toggle
+      document.querySelectorAll(".menu-item").forEach((item) => {
+        item.addEventListener("click", (event) => {
+          event.preventDefault();
+
+          // Close other modals
+          document
+            .querySelectorAll(".modal")
+            .forEach((modal) => (modal.style.display = "none"));
+
+          // Get modal and position it
+          const modalId = item.getAttribute("data-modal");
+          const modal = document.getElementById(modalId);
+          const rect = item.getBoundingClientRect();
+
+          modal.style.top = `${rect.bottom}px`;
+          modal.style.left = `${rect.left}px`;
+          modal.style.display = "block";
+        });
+      });
+
+      // Resizable Sidebar
+      const resizer = document.querySelector(".resizer");
+      const sideBar = document.querySelector(".side-bar");
+      let isResizing = false;
+
+      resizer.addEventListener("mousedown", () => {
+        isResizing = true;
+        document.body.style.cursor = "ew-resize";
+      });
+
+      document.addEventListener("mousemove", (e) => {
+        if (isResizing) {
+          const newWidth = Math.max(200, e.clientX); // Ensure minimum width
+          sideBar.style.width = `${newWidth}px`;
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isResizing = false;
+        document.body.style.cursor = "default";
+      });
+    </script>
+  </body>
 </html>
